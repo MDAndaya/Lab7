@@ -5,8 +5,6 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-#include <stdio.h>
-#include <stdlib.h>
 #include "Course.hpp"
 
 using namespace std;
@@ -63,6 +61,7 @@ int main() {
                 break;
             case 'R':
                 day = Course::THUR;
+                break;
             case 'F':
                 day = Course::FRI;
                 break;

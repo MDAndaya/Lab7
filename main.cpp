@@ -21,20 +21,18 @@ vector<Course> courses;
 void printSchedule() {
     ostream_iterator<Course> osi(cout, "\n");
     copy(courses.begin(), courses.end(), osi);
-
 }
 
 void checkConflicts() {
     for (auto iteri = courses.begin(); iteri != courses.end(); iteri++) {
         for (auto iterj = iteri + 1; iterj != courses.end(); iterj++) {
             if (iteri->getDay() == iterj->getDay() &&
-                iteri->getStartTime() <= iterj->getFinishTime() && iterj->getStartTime() <= iteri->getFinishTime()) {
-                cout << "CONFLICT:\n" << *iteri << "\n" << *iterj << '\n' << endl;
+                iterj->getStartTime() <= iteri->getFinishTime()) {
+                cout << "CONFLICT:\n" << *iteri << "\n" << *iterj << '\n' <<  endl;
             }
         }
     }
 }
-
 
 int main() {
 

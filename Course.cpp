@@ -61,7 +61,8 @@ string Course::getDayString() const {
             return "R";
         case 4:
             return "F";
-        default:;
+        default:
+            return "N/A";
     }
 }
 

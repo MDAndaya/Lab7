@@ -51,15 +51,15 @@ Course::dayOfWeek Course::getDay() const {
 
 string Course::getDayString() const {
     switch (day) {
-        case 0:
+        case dayOfWeek::MON:
             return "M";
-        case 1:
+        case dayOfWeek::TUE:
             return "T";
-        case 2:
+        case dayOfWeek::WED:
             return "W";
-        case 3:
+        case dayOfWeek::THUR:
             return "R";
-        case 4:
+        case dayOfWeek::FRI:
             return "F";
         default:
             return "N/A";

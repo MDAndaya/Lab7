@@ -18,23 +18,25 @@ using namespace std;
 
 vector<Course> courses;
 
-void printSchedule()
-{
-    //TODO implement your print using the copy algorithm, 2 iterators, and an ostream_iterator
+void printSchedule() {
+    ostream_iterator<Course> osi(cout, "\n");
+    copy(courses.begin(), courses.end(), osi);
+
 }
 
 void checkConflicts() {
-    for (auto i = courses.begin(), j = i + 1; j != courses.end(); i++, j++) {
-        if (i->getDay() == j->getDay() &&
-            i->getStartTime() <= j->getFinishTime() && j->getStartTime() <= i->getFinishTime()) {
-            cout << "CONFLICT:\n" << *i << "\n" << *j << '\n' << endl;
-
+    for (auto iteri = courses.begin(); iteri != courses.end(); iteri++) {
+        for (auto iterj = iteri + 1; iterj != courses.end(); iterj++) {
+            if (iteri->getDay() == iterj->getDay() &&
+                iteri->getStartTime() <= iterj->getFinishTime() && iterj->getStartTime() <= iteri->getFinishTime()) {
+                cout << "CONFLICT:\n" << *iteri << "\n" << *iterj << '\n' << endl;
+            }
         }
     }
 }
 
 
-int main () {
+int main() {
 
     // Read from file and put into STL
     ifstream file;
@@ -66,8 +68,7 @@ int main () {
             case 'F':
                 day = Course::FRI;
                 break;
-            default:
-                ;
+            default:;
         }
         iss >> startTime;
         iss >> finishTime;
@@ -78,12 +79,10 @@ int main () {
 
     // Sort STL
     sort(courses.begin(), courses.end());
-
-    //TODO implement code to determine schedule conflicts
-    //TODO print out schedule conflicts
+    // Check conflicts
     checkConflicts();
-    //TODO print out schedule
-
+    // Print schedule
+    printSchedule();
 
     return 0;
 }

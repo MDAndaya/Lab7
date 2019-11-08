@@ -17,9 +17,9 @@ public:
 
     const string &getTitle() const;
     dayOfWeek getDay() const;
+    string getDayString() const;
     unsigned int getStartTime() const;
     unsigned int getFinishTime() const;
-
 
 private:
     string title; // Name of Course

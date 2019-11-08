@@ -37,7 +37,7 @@ bool Course::operator<(const Course &m) const {
 }
 
 ostream &operator<<(ostream &os, const Course &m) {
-    os << m.getTitle() << " " << m.getDay() << " " << m.getStartTime() << " " << m.getFinishTime();
+    os << m.getTitle() << " " << m.getDayString() << " " << m.getStartTime() << " " << m.getFinishTime();
     return os;
 }
 
@@ -47,6 +47,22 @@ const string &Course::getTitle() const {
 
 Course::dayOfWeek Course::getDay() const {
     return day;
+}
+
+string Course::getDayString() const {
+    switch (day) {
+        case 0:
+            return "M";
+        case 1:
+            return "T";
+        case 2:
+            return "W";
+        case 3:
+            return "R";
+        case 4:
+            return "F";
+        default:;
+    }
 }
 
 unsigned int Course::getStartTime() const {

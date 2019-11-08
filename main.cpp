@@ -15,48 +15,75 @@ using namespace std;
  * print schedule - outputs course schedule to the screen
  * @param - add any new parameters you need
  */
+
+vector<Course> courses;
+
 void printSchedule()
 {
     //TODO implement your print using the copy algorithm, 2 iterators, and an ostream_iterator
 }
 
+void checkConflicts() {
+    for (auto i = courses.begin(), j = i + 1; j != courses.end(); i++, j++) {
+        if (i->getDay() == j->getDay() &&
+            i->getStartTime() <= j->getFinishTime() && j->getStartTime() <= i->getFinishTime()) {
+            cout << "CONFLICT:\n" << *i << "\n" << *j << '\n' << endl;
+
+        }
+    }
+}
+
+
 int main () {
 
-    vector<Course> courses;
-
-    //TODO read from courses.txt
+    // Read from file and put into STL
     ifstream file;
     file.open("../courses.txt");
     string line;
     while (getline(file, line, '\n')) {
         istringstream iss(line);
 
-        string course;
+        string title;
         char dayChar;
-        unsigned int timeStart;
-        unsigned int timeEnd;
+        unsigned int startTime;
+        unsigned int finishTime;
 
-        iss >> course;
+        iss >> title;
         iss >> dayChar;
         Course::dayOfWeek day;
         switch (dayChar) {
             case 'M':
-                
-
+                day = Course::MON;
+                break;
+            case 'T':
+                day = Course::TUE;
+                break;
+            case 'W':
+                day = Course::WED;
+                break;
+            case 'R':
+                day = Course::THUR;
+            case 'F':
+                day = Course::FRI;
+                break;
+            default:
+                ;
         }
-        iss >> timeStart;
-        iss >> timeEnd;
+        iss >> startTime;
+        iss >> finishTime;
 
-        Course{course, day, timeStart, timeEnd};
-        courses.
+        Course c{title, day, startTime, finishTime};
+        courses.push_back(c);
     }
 
-    //TODO store data in an STL container
-    //TODO sort your STL container with the sort algorithm
+    // Sort STL
+    sort(courses.begin(), courses.end());
+
     //TODO implement code to determine schedule conflicts
     //TODO print out schedule conflicts
+    checkConflicts();
     //TODO print out schedule
-    cout << "Find the TODOs in the code and implement them." << endl;
-    cout << "Add/modify any functions/code you need to complete your task." << endl;
+
+
     return 0;
 }
